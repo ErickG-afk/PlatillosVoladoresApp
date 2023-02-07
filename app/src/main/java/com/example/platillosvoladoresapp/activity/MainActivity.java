@@ -1,8 +1,10 @@
-package com.example.platillosvoladoresapp;
+package com.example.platillosvoladoresapp.activity;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.example.platillosvoladoresapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
