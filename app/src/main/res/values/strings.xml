@@ -24,27 +24,25 @@
     <string name="comprar_p">Comprar</string>
     <string-array name="tipoDoc">
         <item>DNI</item>
-        <item>RUC</item>
-        <item>CARNET EXT.</item>
-        <item>PASAPORTE</item>
-    </string-array>
-    <string-array name="departamentos">
-        <item>Lambayeque</item>
-        <item>Piura</item>
-        <item>Tumbes</item>
-        <item>Lima</item>
+        <item>NIE</item>
     </string-array>
     <string-array name="provincias">
-        <item>Chiclayo</item>
-        <item>Lambayeque</item>
-        <item>Ferreñafe</item>
+        <item>Alicante</item>
+        <item>Barcelona</item>
+        <item>Cádiz</item>
+        <item>Granada</item>
+        <item>Huesca</item>
+        <item>Madrid</item>
+        <item>Zaragoza</item>
     </string-array>
-    <string-array name="distritos">
-        <item>Ferreñafe</item>
-        <item>Pueblo Nuevo</item>
-        <item>Mesones Muro</item>
-        <item>Inkahuasi</item>
-        <item>Kañaris</item>
+    <string-array name="ciudad">
+        <item>Alicante</item>
+        <item>Barcelona</item>
+        <item>Cádiz</item>
+        <item>Granada</item>
+        <item>Huesca</item>
+        <item>Madrid</item>
+        <item>Zaragoza</item>
     </string-array>
     <string name="title_activity_start">MainActivity</string>
 </resources>
