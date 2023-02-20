@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.platillosvoladoresapp.R;
 import com.example.platillosvoladoresapp.entity.service.Cliente;
@@ -21,14 +22,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDateTime;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Response;
 
 public class RegistrarUsuarioActivity extends AppCompatActivity {
 
     private EditText edtNameUser, edtPrimerApellidoU, edtSegundoApellidoU, edtNumDocU, edtTelefonoU, edtDireccionU, edtEmailUser, edtPasswordUser;
     private Button btnGuardarDatos;
-    private TextInputLayout  txtInputNameUser, txtInputPrimerApellidoU, txtInputSegundoApellidoU, txtInputTipoDoc, txtInputNumeroDocU, txtInputCiudad, txtInputProvincia
-            , txtInputTelefonoU, txtInputDireccionU, txtInputEmailUser, txtInputPasswordUser;
+    private TextInputLayout txtInputNameUser, txtInputPrimerApellidoU, txtInputSegundoApellidoU, txtInputTipoDoc, txtInputNumeroDocU, txtInputCiudad, txtInputProvincia, txtInputTelefonoU, txtInputDireccionU, txtInputEmailUser, txtInputPasswordUser;
     private AutoCompleteTextView dropDownTipoDoc, dropDownCiudad, dropdownProvincia;
 
     private ClienteViewModel clienteViewModel;
@@ -66,7 +67,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         this.documentoAlmacenadoViewModel = vmp.get(DocumentoAlmacenadoViewModel.class);
     }
 
-    private void init(){
+    private void init() {
         dropDownTipoDoc = findViewById(R.id.dropdownTipoDoc);
         dropDownCiudad = findViewById(R.id.dropdownCiudad);
         dropdownProvincia = findViewById(R.id.dropdownProvincia);
@@ -76,8 +77,8 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         edtNumDocU = findViewById(R.id.edtNumDocU);
         edtTelefonoU = findViewById(R.id.edtTelefonoU);
         edtDireccionU = findViewById(R.id.edtDireccionU);
-//        edtEmailUser = findViewById(R.id.edtEmailUser);
-//        edtPasswordUser = findViewById(R.id.edtPasswordUser);
+        edtEmailUser = findViewById(R.id.edtEmailUser);
+        edtPasswordUser = findViewById(R.id.edtPasswordUser);
         txtInputNameUser = findViewById(R.id.txtInputNameUser);
         txtInputPrimerApellidoU = findViewById(R.id.txtInputPrimerApellidoU);
         txtInputSegundoApellidoU = findViewById(R.id.txtInputSegundoApellidoU);
@@ -87,13 +88,13 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         txtInputProvincia = findViewById(R.id.txtInputProvincia);
         txtInputTelefonoU = findViewById(R.id.txtInputTelefonoU);
         txtInputDireccionU = findViewById(R.id.txtInputDireccionU);
-//        txtInputEmailUser = findViewById(R.id.txtInputEmailUser);
-//        txtInputPasswordUser = findViewById(R.id.txtInputPasswordUser);
-//        btnGuardarDatos = findViewById(R.id.btnGuardarDatos);
+        txtInputEmailUser = findViewById(R.id.txtInputEmailUser);
+        txtInputPasswordUser = findViewById(R.id.txtInputPasswordUser);
+        btnGuardarDatos = findViewById(R.id.btnGuardarDatos);
 
-//        btnGuardarDatos.setOnClickListener(v ->{
-//            this.guardarDatos();
-//        });
+        btnGuardarDatos.setOnClickListener(v -> {
+            this.guardarDatos();
+        });
         ///ONCHANGE LISTENEER A LOS EDITEXT
         edtNameUser.addTextChangedListener(new TextWatcher() {
             @Override
@@ -243,7 +244,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
     private void guardarDatos() {
         Cliente cliente = new Cliente();
-        if(validar()){
+        if (validar()) {
             try {
                 cliente.setNombres(edtNameUser.getText().toString());
                 cliente.setPrimerApellido(edtPrimerApellidoU.getText().toString());
@@ -255,30 +256,39 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                 cliente.setProvincia(dropdownProvincia.getText().toString());
                 cliente.setDireccionEnvio(edtDireccionU.getText().toString());
                 cliente.setId(0);
-                this.clienteViewModel.guardarCliente(cliente).observe(this, cResponse->{
-                    if(cResponse.getRpta() ==1){
+                this.clienteViewModel.guardarCliente(cliente).observe(this, cResponse -> {
+                    if (cResponse.getRpta() == 1) {
                         int idCliente = cResponse.getBody().getId();
                         Usuario usuario = new Usuario();
                         usuario.setEmail(edtEmailUser.getText().toString());
                         usuario.setClave(edtPasswordUser.getText().toString());
                         usuario.setVigencia(true);
                         usuario.setCliente(new Cliente(idCliente));
-                        this.usuarioViewModel.save(usuario);
+                        this.usuarioViewModel.save(usuario).observe(this, uResponse -> {
+                            if (uResponse.getRpta() == 1) {
+                                Toast.makeText(this, "Datos almacenados con éxito ", Toast.LENGTH_SHORT).show();
+                                this.finish();
+
+                            } else
+                                Toast.makeText(this, "No se ha podido guardar los datos ", Toast.LENGTH_SHORT).show();
+                        });
+                    } else {
+                        Toast.makeText(this, "No se ha podido guardar los datos", Toast.LENGTH_SHORT).show();
                     }
 
                 });
 
             } catch (Exception e) {
-                e.printStackTrace();
+                warningMessage("Se ha producido un error : " + e.getMessage());
             }
 
-        }
+        } else
+            warningMessage("Por favor complete todos los campos del formulario");
     }
 
-    private boolean validar(){
+    private boolean validar() {
         boolean retorno = true;
-        String nombre, primerApellido, segundoApellido, numDoc, numTelefono, direccion
-                , correo, clave, dropTipoDoc, dropCiudad, dropProvincia;
+        String nombre, primerApellido, segundoApellido, numDoc, numTelefono, direccion, correo, clave, dropTipoDoc, dropCiudad, dropProvincia;
 
         nombre = edtNameUser.getText().toString();
         primerApellido = edtPrimerApellidoU.getText().toString();
@@ -359,5 +369,17 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
             txtInputPasswordUser.setErrorEnabled(false);
         }
         return retorno;
+    }
+
+    public void errorMessage(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("Oops...").setContentText(message).show();
+    }
+
+    public void warningMessage(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Notificacion del Sistema").setContentText(message).setConfirmText("ok").show();
+    }
+
+    public void successMessage(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Correcto").setContentText(message).show();
     }
 }

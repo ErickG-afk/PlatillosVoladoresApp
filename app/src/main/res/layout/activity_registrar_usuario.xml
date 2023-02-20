@@ -342,6 +342,16 @@
                                         android:textSize="15sp"
                                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
                                 </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnGuardarDatos"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end"
+                                    android:layout_marginTop="5dp"
+                                    android:drawableEnd="@drawable/ic_save"
+                                    android:fontFamily="@font/san_francisco"
+                                    android:text="Guardar Datos"
+                                    android:textColor="@color/white" />
 
                             </LinearLayout>
                         </LinearLayout>
