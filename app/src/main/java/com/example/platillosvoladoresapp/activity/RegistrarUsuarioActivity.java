@@ -266,14 +266,16 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                         usuario.setCliente(new Cliente(idCliente));
                         this.usuarioViewModel.save(usuario).observe(this, uResponse -> {
                             if (uResponse.getRpta() == 1) {
-                                Toast.makeText(this, "Datos almacenados con éxito ", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(this, "Datos almacenados con éxito", Toast.LENGTH_SHORT).show();
+                                successMessage("Datos almacenados con éxito");
                                 this.finish();
 
                             } else
-                                Toast.makeText(this, "No se ha podido guardar los datos ", Toast.LENGTH_SHORT).show();
+                                warningMessage("No se ha podido guardar los datos");
                         });
                     } else {
-                        Toast.makeText(this, "No se ha podido guardar los datos", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "No se ha podido guardar los datos", Toast.LENGTH_SHORT).show();
+                        warningMessage("No se ha podido guardar los datos");
                     }
 
                 });

@@ -1,6 +1,9 @@
 package com.example.platillosvoladoresapp.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
@@ -9,6 +12,7 @@ import com.example.platillosvoladoresapp.databinding.ActivityStartBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,6 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 public class StartActivity extends AppCompatActivity {
@@ -59,9 +64,42 @@ public class StartActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.cerrarSesion:
+                this.logout();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void logout() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("UsuarioJson");
+        editor.apply();
+        this.finish();
+        this.overridePendingTransition(R.anim.left_in, R.anim.left_out);
+
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_start);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void errorMessage(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("Oops...").setContentText(message).show();
+    }
+
+    public void warningMessage(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Notificacion del Sistema").setContentText(message).setConfirmText("ok").show();
+    }
+
+    public void successMessage(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Correcto").setContentText(message).show();
     }
 }

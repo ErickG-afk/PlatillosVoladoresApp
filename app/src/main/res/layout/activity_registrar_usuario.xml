@@ -30,6 +30,9 @@
     </LinearLayout>
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,23 +42,22 @@
                 android:id="@+id/layoutSection1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            </LinearLayout>
+                android:orientation="horizontal"></LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="55dp"
                 android:id="@+id/layoutSection2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layoutSection1"
+                android:layout_marginTop="55dp"
                 android:orientation="vertical">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:theme="@style/Theme.MaterialComponents.Light"
                     android:elevation="8dp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
                     app:cardCornerRadius="15dp">
 
                     <RelativeLayout
@@ -298,6 +300,7 @@
                                 </com.google.android.material.textfield.TextInputLayout>
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -321,6 +324,7 @@
                                 </com.google.android.material.textfield.TextInputLayout>
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -342,6 +346,7 @@
                                         android:textSize="15sp"
                                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
                                 </com.google.android.material.textfield.TextInputLayout>
+
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btnGuardarDatos"
                                     android:layout_width="wrap_content"
@@ -359,4 +364,6 @@
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </RelativeLayout>
+    </ScrollView>
+
 </LinearLayout>

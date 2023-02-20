@@ -205,11 +205,11 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String pref = preferences.getString("UsuarioJson", "");
-//        if (!pref.equals("")) {
-//            DisplayCustomToast("Se detecto una sesión activa, el login será omitido!");
-//            this.startActivity(new Intent(this, StartActivity.class));
-//            this.overridePendingTransition(R.anim.left_in, R.anim.left_out);
-//        }
+        if (!pref.equals("")) {
+            DisplayCustomToast("Se detecto una sesión activa, el login será omitido!");
+            this.startActivity(new Intent(this, StartActivity.class));
+            this.overridePendingTransition(R.anim.left_in, R.anim.left_out);
+        }
     }
 
     @Override
