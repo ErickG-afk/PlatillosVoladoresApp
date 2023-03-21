@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtNuevoUsuario;
     private TextInputLayout txtInputUsuario, txtInputPassword;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         txtNuevoUsuario = findViewById(R.id.txtNuevoUsuario);
         txtInputUsuario = findViewById(R.id.txtInputUsuario);
         txtInputPassword = findViewById(R.id.txtInputPassword);
+
+
 
         btnIniciarSesion.setOnClickListener(v -> {
             try {
@@ -174,11 +178,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean validar() {
+
         boolean retorno = true;
         String usuario, password;
+
         usuario = edtMail.getText().toString();
         password = edtPassword.getText().toString();
-        if (usuario.isEmpty()) {
+
+         if (usuario.isEmpty()) {
             txtInputUsuario.setError("Ingrese su usario y/o correo electrónico");
             retorno = false;
         } else {
@@ -198,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String pref = preferences.getString("UsuarioJson", "");
-        if(!pref.equals("")){
+        if (!pref.equals("")) {
             DisplayCustomToast("Se detecto una sesión activa, el login será omitido!");
             this.startActivity(new Intent(this, StartActivity.class));
             this.overridePendingTransition(R.anim.left_in, R.anim.left_out);
@@ -220,4 +227,17 @@ public class MainActivity extends AppCompatActivity {
                     System.exit(0);
                 }).show();
     }
+
+    public void errorMessage(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("Oops...").setContentText(message).show();
+    }
+
+    public void warningMessage(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Notificacion del Sistema").setContentText(message).setConfirmText("ok").show();
+    }
+
+    public void successMessage(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Correcto").setContentText(message).show();
+    }
+
 }

@@ -24,6 +24,7 @@ public class ConfigApi {
     private static UsuarioApi usuarioApi;
     private static ClienteApi clienteApi;
     private static DocumentoAlmacenadoApi documentoAlmacenadoApi;
+    private static CategoriaAPI categoriaAPI;
 
     static {
         initClient();
@@ -38,12 +39,12 @@ public class ConfigApi {
         retrofit = new Retrofit.Builder()
                 .baseUrl(dataB_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(getclient())
+                .client(getClient())
                 .build();
     }
 
     //Enviar requests HTTP
-    private static OkHttpClient getclient() {
+    public static OkHttpClient getClient() {
         HttpLoggingInterceptor logIn = new HttpLoggingInterceptor();
         logIn.level(HttpLoggingInterceptor.Level.BODY);
 
@@ -81,5 +82,12 @@ public class ConfigApi {
         if(documentoAlmacenadoApi ==null)
             documentoAlmacenadoApi = retrofit.create(DocumentoAlmacenadoApi.class);
         return documentoAlmacenadoApi;
+    }
+
+    public static CategoriaAPI getCategoriaAPI()
+    {
+        if(categoriaAPI ==null)
+            categoriaAPI = retrofit.create(CategoriaAPI.class);
+        return categoriaAPI;
     }
 }
