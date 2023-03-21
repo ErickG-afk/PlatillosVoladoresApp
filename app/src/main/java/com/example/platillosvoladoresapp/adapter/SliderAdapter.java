@@ -37,8 +37,8 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
         SliderItem sliderItem = mSliderItems.get(position);
 
         viewHolder.textView.setText(sliderItem.getTitle());
-        viewHolder.textView.setTextSize(16);
-        viewHolder.textView.setTextColor(Color.WHITE);
+        viewHolder.textView.setTextSize(20);
+        viewHolder.textView.setTextColor(Color.BLACK);
         Glide.with(viewHolder.itemView)
                 .load(sliderItem.getImage())
                 .fitCenter()
