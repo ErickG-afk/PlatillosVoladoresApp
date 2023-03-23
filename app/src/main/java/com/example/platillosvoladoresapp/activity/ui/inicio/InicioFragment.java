@@ -55,15 +55,15 @@ public class InicioFragment extends Fragment {
         list.add(new SliderItem(R.drawable.croquetas,"Croquetas"));
         list.add(new SliderItem(R.drawable.paella,"Paella"));
         sliderAdapter.updateItem(list);
-//        categoriaViewModel.listarCategoriasActivas().observe(getViewLifecycleOwner(), response -> {
-//            if(response.getRpta() ==1){
-//                categoriaAdapter.clear();
-//                categoriaAdapter.addAll(response.getBody());
-//                categoriaAdapter.notifyDataSetChanged();
-//            }else{
-//                System.out.println("Error al obtener las categorías activas");
-//            }
-//        });
+        categoriaViewModel.listarCategoriasActivas().observe(getViewLifecycleOwner(), response -> {
+            if(response.getRpta() ==1){
+                categoriaAdapter.clear();
+                categoriaAdapter.addAll(response.getBody());
+                categoriaAdapter.notifyDataSetChanged();
+            }else{
+                System.out.println("Error al obtener las categorías activas");
+            }
+        });
     }
 
     private void initAdapter() {
