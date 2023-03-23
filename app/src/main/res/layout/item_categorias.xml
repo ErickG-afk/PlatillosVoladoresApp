@@ -4,8 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
-
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/crdCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="8dp"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:cardCornerRadius="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -17,7 +23,6 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:scaleType="fitXY"
-                android:layout_margin="2dp"
                 android:src="@drawable/food_img2" />
 
             <TextView
@@ -35,6 +40,6 @@
                 android:text="Categoría 1"
                 android:textColor="#000" />
         </RelativeLayout>
-
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
