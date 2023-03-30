@@ -11,12 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.platillosvoladoresapp.R;
 import com.example.platillosvoladoresapp.adapter.CategoriaAdapter;
+import com.example.platillosvoladoresapp.adapter.PlatoRecomendadoAdapter;
 import com.example.platillosvoladoresapp.adapter.SliderAdapter;
 import com.example.platillosvoladoresapp.entity.SliderItem;
+import com.example.platillosvoladoresapp.entity.service.Plato;
 import com.example.platillosvoladoresapp.viewmodel.CategoriaViewModel;
+import com.example.platillosvoladoresapp.viewmodel.PlatoViewModel;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -32,6 +37,10 @@ public class InicioFragment extends Fragment {
     private CategoriaViewModel categoriaViewModel;
     private GridView gvCategorias;
     private CategoriaAdapter categoriaAdapter;
+    private PlatoViewModel platoViewModel;
+    private RecyclerView rcvPlatosRecomendados;
+    private PlatoRecomendadoAdapter platoRecomendadoAdapter;
+    private List<Plato> platos = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,21 +64,24 @@ public class InicioFragment extends Fragment {
         list.add(new SliderItem(R.drawable.croquetas,"Croquetas"));
         list.add(new SliderItem(R.drawable.paella,"Paella"));
         sliderAdapter.updateItem(list);
-//        categoriaViewModel.listarCategoriasActivas().observe(getViewLifecycleOwner(), response -> {
-//            if(response.getRpta() ==1){
-//                categoriaAdapter.clear();
-//                categoriaAdapter.addAll(response.getBody());
-//                categoriaAdapter.notifyDataSetChanged();
-//            }else{
-//                System.out.println("Error al obtener las categorías activas");
-//            }
-//        });
+        categoriaViewModel.listarCategoriasActivas().observe(getViewLifecycleOwner(), response -> {
+            if(response.getRpta() ==1){
+                categoriaAdapter.clear();
+                categoriaAdapter.addAll(response.getBody());
+                categoriaAdapter.notifyDataSetChanged();
+            }else{
+                System.out.println("Error al obtener las categorías activas");
+            }
+        });
+
+        platoViewModel.listarPlatosRecomendados().observe(getViewLifecycleOwner(), response ->{
+            platoRecomendadoAdapter.updateItems(response.getBody());
+        });
     }
 
     private void initAdapter() {
         //Carrusel de Imágenes
         sliderAdapter = new SliderAdapter(getContext());
-
         svCarousell.setSliderAdapter(sliderAdapter);
         svCarousell.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         svCarousell.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
@@ -78,16 +90,26 @@ public class InicioFragment extends Fragment {
         svCarousell.setIndicatorUnselectedColor(Color.GRAY);
         svCarousell.setScrollTimeInSec(4); //set scroll delay in seconds :
         svCarousell.startAutoCycle();
+
         categoriaAdapter = new CategoriaAdapter(getContext(), R.layout.item_categorias, new ArrayList<>());
         gvCategorias.setAdapter(categoriaAdapter);
+
+        platoRecomendadoAdapter = new PlatoRecomendadoAdapter(platos);
+        rcvPlatosRecomendados.setAdapter(platoRecomendadoAdapter);
 
     }
 
     private void init(View view) {
         svCarousell = view.findViewById(R.id.svCarrusel);
         ViewModelProvider vmp = new ViewModelProvider(this);
+
         categoriaViewModel = vmp.get(CategoriaViewModel.class);
         gvCategorias = view.findViewById(R.id.gvCategorias);
+
+        rcvPlatosRecomendados = view.findViewById(R.id.rcvPlatillosRecomendados);
+        rcvPlatosRecomendados.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        platoViewModel = vmp.get(PlatoViewModel.class);
+
     }
 
 

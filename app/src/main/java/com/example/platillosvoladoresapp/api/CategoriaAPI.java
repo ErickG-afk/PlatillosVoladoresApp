@@ -9,7 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface CategoriaAPI {
-    String base = "api/categoria";
+    String base = "api/category";
 
     @GET(base)
     Call<GenericResponse<List<Categoria>>> listarCategoriasActivas();
