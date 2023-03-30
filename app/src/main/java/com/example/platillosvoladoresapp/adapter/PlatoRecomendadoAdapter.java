@@ -78,8 +78,12 @@ public class PlatoRecomendadoAdapter extends RecyclerView.Adapter<PlatoRecomenda
                     .into(imgPlatillo);
             namePlatillo.setText(p.getNombre());
             btnOrdenar.setOnClickListener(v -> {
-                Toast.makeText(itemView.getContext(), "Hi there!", Toast.LENGTH_SHORT).show();
-            });
+                DetallePedido detallePedido = new DetallePedido();
+                detallePedido.setPlato(p);
+                detallePedido.setCantidad(1);
+                detallePedido.setPrecio(p.getPrecio());
+                //mostrarBadgeCommunication.add(detallePedido);
+                 });
 
 
         }

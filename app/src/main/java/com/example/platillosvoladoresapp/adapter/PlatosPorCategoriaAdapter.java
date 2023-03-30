@@ -26,6 +26,7 @@ public class PlatosPorCategoriaAdapter extends RecyclerView.Adapter<PlatosPorCat
     public PlatosPorCategoriaAdapter(List<Plato> listadoPlatoPorCategoria) {
         this.listadoPlatoPorCategoria = listadoPlatoPorCategoria;
 
+
     }
 
     @NonNull

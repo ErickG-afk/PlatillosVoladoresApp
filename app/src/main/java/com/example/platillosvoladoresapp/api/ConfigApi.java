@@ -26,6 +26,7 @@ public class ConfigApi {
     private static DocumentoAlmacenadoApi documentoAlmacenadoApi;
     private static CategoriaAPI categoriaAPI;
     private static PlatoApi platoApi;
+    private static PedidoApi pedidoApi;
 
     static {
         initClient();
@@ -96,4 +97,11 @@ public class ConfigApi {
             platoApi = retrofit.create(PlatoApi.class);
         return platoApi;
     }
+    public static PedidoApi getPedidoApi(){
+        if (pedidoApi == null)
+            pedidoApi = retrofit.create(PedidoApi.class);
+        return pedidoApi;
+    }
+
+
 }
