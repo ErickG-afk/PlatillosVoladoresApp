@@ -77,13 +77,13 @@ public class DetallePlatoActivity extends AppCompatActivity {
             System.out.println("Error al obtener los detalles del platillo");
         }
         //Agregar platillos al carrito
-//        this.btnAgregarCarrito.setOnClickListener(v -> {
-//            DetallePedido detallePedido = new DetallePedido();
-//            detallePedido.setPlato(platillo);
-//            detallePedido.setCantidad(1);
-//            detallePedido.setPrecio(platillo.getPrecio());
-//            successMessage(Carrito.agregarPlatillos(detallePedido));
-//        });
+        this.btnAgregarCarrito.setOnClickListener(v -> {
+            DetallePedido detallePedido = new DetallePedido();
+            detallePedido.setPlato(platillo);
+            detallePedido.setCantidad(1);
+            detallePedido.setPrecio(platillo.getPrecio());
+            successMessage(Carrito.agregarPlatillos(detallePedido));
+        });
 
     }
     public void successMessage(String message) {
