@@ -1,5 +1,6 @@
 package com.example.platillosvoladoresapp.activity.ui.inicio;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.example.platillosvoladoresapp.R;
 import com.example.platillosvoladoresapp.adapter.CategoriaAdapter;
 import com.example.platillosvoladoresapp.adapter.PlatoRecomendadoAdapter;
 import com.example.platillosvoladoresapp.adapter.SliderAdapter;
+import com.example.platillosvoladoresapp.communication.Communication;
 import com.example.platillosvoladoresapp.entity.SliderItem;
 import com.example.platillosvoladoresapp.entity.service.Plato;
 import com.example.platillosvoladoresapp.viewmodel.CategoriaViewModel;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class InicioFragment extends Fragment {
+public class InicioFragment extends Fragment implements Communication {
 
     private SliderView svCarousell;
     private SliderAdapter sliderAdapter;
@@ -94,7 +96,7 @@ public class InicioFragment extends Fragment {
         categoriaAdapter = new CategoriaAdapter(getContext(), R.layout.item_categorias, new ArrayList<>());
         gvCategorias.setAdapter(categoriaAdapter);
 
-        platoRecomendadoAdapter = new PlatoRecomendadoAdapter(platos);
+        platoRecomendadoAdapter = new PlatoRecomendadoAdapter(platos, this);
         rcvPlatosRecomendados.setAdapter(platoRecomendadoAdapter);
 
     }
@@ -113,4 +115,9 @@ public class InicioFragment extends Fragment {
     }
 
 
+    @Override
+    public void showDetails(Intent i) {
+        getActivity().startActivity(i);
+        getActivity().overridePendingTransition(R.anim.left_in, R.anim.left_out);
+    }
 }
