@@ -1,6 +1,7 @@
 package com.example.platillosvoladoresapp.adapter;
 
 import android.content.Intent;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.example.platillosvoladoresapp.R;
 import com.example.platillosvoladoresapp.activity.ui.DetallePlatoActivity;
 import com.example.platillosvoladoresapp.api.ConfigApi;
 import com.example.platillosvoladoresapp.communication.Communication;
+import com.example.platillosvoladoresapp.communication.MostrarBadgeCommunication;
 import com.example.platillosvoladoresapp.entity.service.DetallePedido;
 import com.example.platillosvoladoresapp.entity.service.Plato;
 import com.example.platillosvoladoresapp.utils.DateSerializer;
@@ -32,10 +34,13 @@ public class PlatoRecomendadoAdapter extends RecyclerView.Adapter<PlatoRecomenda
 
     private List<Plato> platoList;
     private final Communication communication;
+    private final MostrarBadgeCommunication mostrarBadgeCommunication;
 
-    public PlatoRecomendadoAdapter(List<Plato> platoList, Communication communication) {
+    public PlatoRecomendadoAdapter(List<Plato> platoList, Communication communication, MostrarBadgeCommunication mostrarBadgeCommunication) {
         this.platoList = platoList;
         this.communication = communication;
+
+        this.mostrarBadgeCommunication = mostrarBadgeCommunication;
     }
 
     @NonNull
@@ -87,7 +92,7 @@ public class PlatoRecomendadoAdapter extends RecyclerView.Adapter<PlatoRecomenda
                 detallePedido.setPlato(p);
                 detallePedido.setCantidad(1);
                 detallePedido.setPrecio(p.getPrecio());
-                //mostrarBadgeCommunication.add(detallePedido);
+                mostrarBadgeCommunication.add(detallePedido);
                  });
                 //Inicializar la vista del detalle del platillo
             itemView.setOnClickListener(v -> {

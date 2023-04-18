@@ -6,17 +6,25 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.example.platillosvoladoresapp.R;
 import com.example.platillosvoladoresapp.adapter.PlatosPorCategoriaAdapter;
+import com.example.platillosvoladoresapp.communication.MostrarBadgeCommunication;
+import com.example.platillosvoladoresapp.entity.service.DetallePedido;
 import com.example.platillosvoladoresapp.entity.service.Plato;
+import com.example.platillosvoladoresapp.utils.Carrito;
 import com.example.platillosvoladoresapp.viewmodel.PlatoViewModel;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.badge.BadgeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListarPlatosPorCategoriaActivity extends AppCompatActivity {
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+public class ListarPlatosPorCategoriaActivity extends AppCompatActivity implements MostrarBadgeCommunication {
     private PlatoViewModel platoViewModel;
     private PlatosPorCategoriaAdapter adapter;
     private List<Plato> platos = new ArrayList<>();
@@ -47,7 +55,7 @@ public class ListarPlatosPorCategoriaActivity extends AppCompatActivity {
     }
 
     private void initAdapter() {
-        adapter = new PlatosPorCategoriaAdapter(platos);
+        adapter = new PlatosPorCategoriaAdapter(platos, this);
         rcvPlatoPorCategoria = findViewById(R.id.rcvPlatillosPorCategoria);
         rcvPlatoPorCategoria.setAdapter(adapter);
         rcvPlatoPorCategoria.setLayoutManager(new LinearLayoutManager(this));
@@ -59,5 +67,17 @@ public class ListarPlatosPorCategoriaActivity extends AppCompatActivity {
         platoViewModel.listarPlatosPorCategoria(idC).observe(this, response -> {
             adapter.updateItems(response.getBody());
         });
+    }
+
+
+    @Override
+    public void add(DetallePedido dp) {
+        successMessage(Carrito.agregarPlatillos(dp));
+
+    }
+    public void successMessage(String message) {
+        new SweetAlertDialog(this,
+                SweetAlertDialog.SUCCESS_TYPE).setTitleText("Buen Trabajo!")
+                .setContentText(message).show();
     }
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.platillosvoladoresapp.R;
 import com.example.platillosvoladoresapp.api.ConfigApi;
+import com.example.platillosvoladoresapp.communication.MostrarBadgeCommunication;
 import com.example.platillosvoladoresapp.entity.service.DetallePedido;
 import com.example.platillosvoladoresapp.entity.service.Plato;
 import com.squareup.picasso.OkHttp3Downloader;
@@ -22,11 +23,13 @@ import java.util.Locale;
 
 public class PlatosPorCategoriaAdapter extends RecyclerView.Adapter<PlatosPorCategoriaAdapter.ViewHolder> {
     private List<Plato> listadoPlatoPorCategoria;
+    private final MostrarBadgeCommunication mostrarBadgeCommunication;
 
-    public PlatosPorCategoriaAdapter(List<Plato> listadoPlatoPorCategoria) {
+    public PlatosPorCategoriaAdapter(List<Plato> listadoPlatoPorCategoria, MostrarBadgeCommunication mostrarBadgeCommunication) {
         this.listadoPlatoPorCategoria = listadoPlatoPorCategoria;
 
 
+        this.mostrarBadgeCommunication = mostrarBadgeCommunication;
     }
 
     @NonNull
@@ -82,6 +85,7 @@ public class PlatosPorCategoriaAdapter extends RecyclerView.Adapter<PlatosPorCat
                 detallePedido.setPlato(p);
                 detallePedido.setCantidad(1);
                 detallePedido.setPrecio(p.getPrecio());
+                mostrarBadgeCommunication.add(detallePedido);
 
             });
         }
