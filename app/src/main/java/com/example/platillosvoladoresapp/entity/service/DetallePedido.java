@@ -4,14 +4,14 @@ public class DetallePedido {
     private int id;
     private int cantidad;
     private Double precio;
-    private Plato plato;
+    private Platillo platillo;
 
-    public Plato getPlato() {
-        return plato;
+    public Platillo getPlatillo() {
+        return platillo;
     }
 
-    public void setPlato(Plato plato) {
-        this.plato = plato;
+    public void setPlatillo(Platillo platillo) {
+        this.platillo = platillo;
     }
 
     private Pedido pedido;

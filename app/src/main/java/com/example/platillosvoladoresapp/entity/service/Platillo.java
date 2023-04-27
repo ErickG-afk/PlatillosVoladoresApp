@@ -1,13 +1,13 @@
 package com.example.platillosvoladoresapp.entity.service;
 
-public class Plato {
+public class Platillo {
 
     private int id;
     private String nombre;
     private DocumentoAlmacenado foto;
     private Double precio;
     private int stock;
-    private String descripcionPlato;
+    private String descripcionPlatillo;
     private Categoria categoria;
     private boolean vigencia;
     private boolean recomendado;
@@ -53,11 +53,11 @@ public class Plato {
     }
 
     public String getDescripcionPlato() {
-        return descripcionPlato;
+        return descripcionPlatillo;
     }
 
     public void setDescripcionPlato(String descripcionPlato) {
-        this.descripcionPlato = descripcionPlato;
+        this.descripcionPlatillo = descripcionPlato;
     }
 
     public Categoria getCategoria() {

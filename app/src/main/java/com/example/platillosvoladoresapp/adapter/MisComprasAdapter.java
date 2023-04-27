@@ -71,18 +71,9 @@ public class MisComprasAdapter extends RecyclerView.Adapter<MisComprasAdapter.Vi
                     txtValueOrder = this.itemView.findViewById(R.id.txtValueOrder);
             txtValueCodPurchases.setText("C000" + Integer.toString(dto.getPedido().getId()));
             txtValueDatePurchases.setText((dto.getPedido().getFechaCompra()).toString());
-            txtValueAmount.setText(" " +(dto.getPedido().getTotalAPagar()));
+            txtValueAmount.setText(" " +(dto.getPedido().getCantidad()));
             txtValueOrder.setText(dto.getPedido().isAnularPedido() ? "Pedido cancelado" : "Enviado, en proceso de envio...");
 
-            itemView.setOnClickListener(v -> {
-                final Intent i = new Intent(itemView.getContext(), DetalleMisComprasActivity.class);
-                final Gson g = new GsonBuilder()
-                        .registerTypeAdapter(Date.class, new DateSerializer())
-                        .registerTypeAdapter(Time.class, new TimeSerializer())
-                        .create();
-                i.putExtra("detailsPurchases", g.toJson(dto.getDetallePedidos()));
-                communication.showDetails(i);//Esto es solo para dar una animación.
-            });
         }
     }
 }

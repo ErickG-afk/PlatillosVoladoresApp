@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.platillosvoladoresapp.entity.GenericResponse;
+import com.example.platillosvoladoresapp.entity.service.dto.GenerarPedidoDTO;
 import com.example.platillosvoladoresapp.entity.service.dto.PedidoConDetalleDTO;
 import com.example.platillosvoladoresapp.repository.PedidoRepository;
 
@@ -22,5 +23,8 @@ public class PedidoViewModel extends AndroidViewModel {
     }
     public LiveData<GenericResponse<List<PedidoConDetalleDTO>>> listarPedidosPorCliente(int idCliente){
         return this.repository.listarPedidosPorCliente(idCliente);
+    }
+    public LiveData<GenericResponse<GenerarPedidoDTO>> guardarPedido(GenerarPedidoDTO dto){
+        return repository.save(dto);
     }
 }

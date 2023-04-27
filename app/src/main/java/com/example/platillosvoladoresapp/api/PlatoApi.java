@@ -1,7 +1,7 @@
 package com.example.platillosvoladoresapp.api;
 
 import com.example.platillosvoladoresapp.entity.GenericResponse;
-import com.example.platillosvoladoresapp.entity.service.Plato;
+import com.example.platillosvoladoresapp.entity.service.Platillo;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ public interface PlatoApi {
     String base = "api/platillo";
 
     @GET(base)
-    Call<GenericResponse<List<Plato>>> listarPlatosRecomendados();
+    Call<GenericResponse<List<Platillo>>> listarPlatosRecomendados();
 
     @GET(base + "/{idC}")
-    Call<GenericResponse<List<Plato>>> listarPlatoPorCategora(@Path("idC") int idC);
+    Call<GenericResponse<List<Platillo>>> listarPlatoPorCategora(@Path("idC") int idC);
 }

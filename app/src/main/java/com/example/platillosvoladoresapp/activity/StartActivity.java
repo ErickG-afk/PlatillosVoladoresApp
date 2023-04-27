@@ -1,5 +1,6 @@
 package com.example.platillosvoladoresapp.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -39,6 +40,7 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        
         super.onCreate(savedInstanceState);
 
         binding = ActivityStartBinding.inflate(getLayoutInflater());
@@ -78,9 +80,17 @@ public class StartActivity extends AppCompatActivity {
             case R.id.cerrarSesion:
                 this.logout();
                 break;
+            case R.id.bolsaCompras:
+                this.mostrarBolsa();
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void mostrarBolsa() {
+        Intent i = new Intent(this, CarritoComprasActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.left_in, R.anim.left_out);
     }
 
     @Override

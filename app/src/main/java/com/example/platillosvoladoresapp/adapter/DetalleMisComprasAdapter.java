@@ -63,7 +63,7 @@ public class DetalleMisComprasAdapter extends RecyclerView.Adapter<DetalleMisCom
         }
 
         public void setItem(final DetallePedido detalle) {
-            String url = ConfigApi.dataB_URL + "/api/documento-almacenado/download/" + detalle.getPlato().getFoto().getFileName();
+            String url = ConfigApi.dataB_URL + "/api/documento-almacenado/download/" + detalle.getPlatillo().getFoto().getFileName();
 
             Picasso picasso = new Picasso.Builder(itemView.getContext())
                     .downloader(new OkHttp3Downloader(ConfigApi.getClient()))
@@ -73,7 +73,7 @@ public class DetalleMisComprasAdapter extends RecyclerView.Adapter<DetalleMisCom
                     .error(R.drawable.image_not_found)
                     .into(imgProduct);
             txtValueCodDetailPurchases.setText("C000" + Integer.toString(detalle.getPedido().getId()));
-            txtValuePlatillo.setText(detalle.getPlato().getNombre());
+            txtValuePlatillo.setText(detalle.getPlatillo().getNombre());
             txtValueQuantity.setText(Integer.toString(detalle.getCantidad()));
             txtValuePrecioPlatillo.setText(String.format(Locale.ENGLISH, "S/%.2f", detalle.getPrecio()));
         }

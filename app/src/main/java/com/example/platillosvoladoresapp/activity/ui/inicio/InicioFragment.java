@@ -1,5 +1,7 @@
 package com.example.platillosvoladoresapp.activity.ui.inicio;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,8 +20,12 @@ import com.example.platillosvoladoresapp.R;
 import com.example.platillosvoladoresapp.adapter.CategoriaAdapter;
 import com.example.platillosvoladoresapp.adapter.PlatoRecomendadoAdapter;
 import com.example.platillosvoladoresapp.adapter.SliderAdapter;
+import com.example.platillosvoladoresapp.communication.Communication;
+import com.example.platillosvoladoresapp.communication.MostrarBadgeCommunication;
 import com.example.platillosvoladoresapp.entity.SliderItem;
-import com.example.platillosvoladoresapp.entity.service.Plato;
+import com.example.platillosvoladoresapp.entity.service.DetallePedido;
+import com.example.platillosvoladoresapp.entity.service.Platillo;
+import com.example.platillosvoladoresapp.utils.Carrito;
 import com.example.platillosvoladoresapp.viewmodel.CategoriaViewModel;
 import com.example.platillosvoladoresapp.viewmodel.PlatoViewModel;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -29,8 +35,10 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class InicioFragment extends Fragment {
+
+public class InicioFragment extends Fragment implements Communication, MostrarBadgeCommunication {
 
     private SliderView svCarousell;
     private SliderAdapter sliderAdapter;
@@ -40,7 +48,7 @@ public class InicioFragment extends Fragment {
     private PlatoViewModel platoViewModel;
     private RecyclerView rcvPlatosRecomendados;
     private PlatoRecomendadoAdapter platoRecomendadoAdapter;
-    private List<Plato> platos = new ArrayList<>();
+    private List<Platillo> platos = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -94,7 +102,7 @@ public class InicioFragment extends Fragment {
         categoriaAdapter = new CategoriaAdapter(getContext(), R.layout.item_categorias, new ArrayList<>());
         gvCategorias.setAdapter(categoriaAdapter);
 
-        platoRecomendadoAdapter = new PlatoRecomendadoAdapter(platos);
+        platoRecomendadoAdapter = new PlatoRecomendadoAdapter(platos, this, this);
         rcvPlatosRecomendados.setAdapter(platoRecomendadoAdapter);
 
     }
@@ -113,4 +121,24 @@ public class InicioFragment extends Fragment {
     }
 
 
+    @Override
+    public void showDetails(Intent i) {
+        getActivity().startActivity(i);
+        getActivity().overridePendingTransition(R.anim.left_in, R.anim.left_out);
+    }
+
+
+    @SuppressLint("UnsafeOptInUsageError")
+    @Override
+    public void add(DetallePedido dp) {
+        successMessage(Carrito.agregarPlatillos(dp));
+        //BadgeDrawable badgeDrawable = BadgeDrawable.create(this.getContext());
+        //badgeDrawable.setNumber(Carrito.getDetallePedidos().size());
+        //BadgeUtils.attachBadgeDrawable(badgeDrawable, getActivity().findViewById(R.id.toolbar), R.id.bolsaCompras);
+    }
+    public void successMessage(String message) {
+        new SweetAlertDialog(this.getContext(),
+                SweetAlertDialog.SUCCESS_TYPE).setTitleText("Buen Trabajo!")
+                .setContentText(message).show();
+    }
 }

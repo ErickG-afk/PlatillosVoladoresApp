@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.platillosvoladoresapp.api.ConfigApi;
 import com.example.platillosvoladoresapp.api.PlatoApi;
 import com.example.platillosvoladoresapp.entity.GenericResponse;
-import com.example.platillosvoladoresapp.entity.service.Plato;
+import com.example.platillosvoladoresapp.entity.service.Platillo;
 
 import java.util.List;
 
@@ -27,16 +27,16 @@ public class PlatoRepository {
             repository = new PlatoRepository();
         return repository;
     }
-    public LiveData<GenericResponse<List<Plato>>> listarPlatosRecomendados(){
-        final MutableLiveData<GenericResponse<List<Plato>>> mld = new MutableLiveData<>();
-        this.api.listarPlatosRecomendados().enqueue(new Callback<GenericResponse<List<Plato>>>() {
+    public LiveData<GenericResponse<List<Platillo>>> listarPlatosRecomendados(){
+        final MutableLiveData<GenericResponse<List<Platillo>>> mld = new MutableLiveData<>();
+        this.api.listarPlatosRecomendados().enqueue(new Callback<GenericResponse<List<Platillo>>>() {
             @Override
-            public void onResponse(Call<GenericResponse<List<Plato>>> call, Response<GenericResponse<List<Plato>>> response) {
+            public void onResponse(Call<GenericResponse<List<Platillo>>> call, Response<GenericResponse<List<Platillo>>> response) {
                 mld.setValue(response.body());
             }
 
             @Override
-            public void onFailure(Call<GenericResponse<List<Plato>>> call, Throwable t) {
+            public void onFailure(Call<GenericResponse<List<Platillo>>> call, Throwable t) {
                 mld.setValue(new GenericResponse<>());
                 t.printStackTrace();
             }
@@ -44,16 +44,16 @@ public class PlatoRepository {
         return mld;
     }
 
-    public LiveData<GenericResponse<List<Plato>>> listarPlatosPorCategoria(int idC){
-        final MutableLiveData<GenericResponse<List<Plato>>> mld = new MutableLiveData<>();
-        this.api.listarPlatoPorCategora(idC).enqueue(new Callback<GenericResponse<List<Plato>>>() {
+    public LiveData<GenericResponse<List<Platillo>>> listarPlatosPorCategoria(int idC){
+        final MutableLiveData<GenericResponse<List<Platillo>>> mld = new MutableLiveData<>();
+        this.api.listarPlatoPorCategora(idC).enqueue(new Callback<GenericResponse<List<Platillo>>>() {
             @Override
-            public void onResponse(Call<GenericResponse<List<Plato>>> call, Response<GenericResponse<List<Plato>>> response) {
+            public void onResponse(Call<GenericResponse<List<Platillo>>> call, Response<GenericResponse<List<Platillo>>> response) {
                 mld.setValue(response.body());
             }
 
             @Override
-            public void onFailure(Call<GenericResponse<List<Plato>>> call, Throwable t) {
+            public void onFailure(Call<GenericResponse<List<Platillo>>> call, Throwable t) {
                 mld.setValue(new GenericResponse<>());
                 t.printStackTrace();
             }

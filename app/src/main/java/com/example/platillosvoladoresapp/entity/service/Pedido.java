@@ -7,7 +7,7 @@ public class Pedido {
     private int id;
     private Date fechaCompra;
     private Cliente cliente;
-    private Double totalAPagar;
+    private Double cantidad;
     private boolean anularPedido;
 
     public int getId() {
@@ -30,16 +30,20 @@ public class Pedido {
         return cliente;
     }
 
+    public void setCantidad(Double cantidad) {
+        this.cantidad = cantidad;
+    }
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    public Double getTotalAPagar() {
-        return totalAPagar;
+    public Double getCantidad() {
+        return cantidad;
     }
 
-    public void getTotalAPagar(Double totalAPagar) {
-        this.totalAPagar = totalAPagar;
+    public void getTotalAPagar(Double cantidad) {
+        this.cantidad = cantidad;
     }
 
     public boolean isAnularPedido() {
