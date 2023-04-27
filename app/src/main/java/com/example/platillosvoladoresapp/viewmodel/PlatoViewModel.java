@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.platillosvoladoresapp.entity.GenericResponse;
-import com.example.platillosvoladoresapp.entity.service.Plato;
+import com.example.platillosvoladoresapp.entity.service.Platillo;
 import com.example.platillosvoladoresapp.repository.PlatoRepository;
 
 import java.util.List;
@@ -21,10 +21,10 @@ public class PlatoViewModel extends AndroidViewModel {
         repository = PlatoRepository.getInstance();
     }
 
-    public LiveData<GenericResponse<List<Plato>>> listarPlatosRecomendados(){
+    public LiveData<GenericResponse<List<Platillo>>> listarPlatosRecomendados(){
         return this.repository.listarPlatosRecomendados();
     }
-    public LiveData<GenericResponse<List<Plato>>> listarPlatosPorCategoria(int idC){
+    public LiveData<GenericResponse<List<Platillo>>> listarPlatosPorCategoria(int idC){
         return this.repository.listarPlatosPorCategoria(idC);
     }
 

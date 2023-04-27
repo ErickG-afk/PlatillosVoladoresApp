@@ -6,18 +6,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.example.platillosvoladoresapp.R;
 import com.example.platillosvoladoresapp.adapter.PlatosPorCategoriaAdapter;
 import com.example.platillosvoladoresapp.communication.MostrarBadgeCommunication;
 import com.example.platillosvoladoresapp.entity.service.DetallePedido;
-import com.example.platillosvoladoresapp.entity.service.Plato;
+import com.example.platillosvoladoresapp.entity.service.Platillo;
 import com.example.platillosvoladoresapp.utils.Carrito;
 import com.example.platillosvoladoresapp.viewmodel.PlatoViewModel;
-import com.google.android.material.badge.BadgeDrawable;
-import com.google.android.material.badge.BadgeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class ListarPlatosPorCategoriaActivity extends AppCompatActivity implements MostrarBadgeCommunication {
     private PlatoViewModel platoViewModel;
     private PlatosPorCategoriaAdapter adapter;
-    private List<Plato> platos = new ArrayList<>();
+    private List<Platillo> platos = new ArrayList<>();
     private RecyclerView rcvPlatoPorCategoria;
 
     @Override

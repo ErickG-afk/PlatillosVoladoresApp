@@ -14,7 +14,7 @@ import com.example.platillosvoladoresapp.R;
 import com.example.platillosvoladoresapp.api.ConfigApi;
 import com.example.platillosvoladoresapp.communication.MostrarBadgeCommunication;
 import com.example.platillosvoladoresapp.entity.service.DetallePedido;
-import com.example.platillosvoladoresapp.entity.service.Plato;
+import com.example.platillosvoladoresapp.entity.service.Platillo;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -22,10 +22,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class PlatosPorCategoriaAdapter extends RecyclerView.Adapter<PlatosPorCategoriaAdapter.ViewHolder> {
-    private List<Plato> listadoPlatoPorCategoria;
+    private List<Platillo> listadoPlatoPorCategoria;
     private final MostrarBadgeCommunication mostrarBadgeCommunication;
 
-    public PlatosPorCategoriaAdapter(List<Plato> listadoPlatoPorCategoria, MostrarBadgeCommunication mostrarBadgeCommunication) {
+    public PlatosPorCategoriaAdapter(List<Platillo> listadoPlatoPorCategoria, MostrarBadgeCommunication mostrarBadgeCommunication) {
         this.listadoPlatoPorCategoria = listadoPlatoPorCategoria;
 
 
@@ -49,7 +49,7 @@ public class PlatosPorCategoriaAdapter extends RecyclerView.Adapter<PlatosPorCat
         return this.listadoPlatoPorCategoria.size();
     }
 
-    public void updateItems(List<Plato> platosByCategoria) {
+    public void updateItems(List<Platillo> platosByCategoria) {
         this.listadoPlatoPorCategoria.clear();
         this.listadoPlatoPorCategoria.addAll(platosByCategoria);
         this.notifyDataSetChanged();
@@ -68,7 +68,7 @@ public class PlatosPorCategoriaAdapter extends RecyclerView.Adapter<PlatosPorCat
             this.btnOrdenarPC = itemView.findViewById(R.id.btnOrdenarPC);
         }
 
-        public void setItem(final Plato p) {
+        public void setItem(final Platillo p) {
             String url = ConfigApi.dataB_URL + "/api/documento-almacenado/download/" + p.getFoto().getFileName();
 
             Picasso picasso = new Picasso.Builder(itemView.getContext())
@@ -82,7 +82,7 @@ public class PlatosPorCategoriaAdapter extends RecyclerView.Adapter<PlatosPorCat
             txtPricePlatilloC.setText(String.format(Locale.ENGLISH, "S/%.2f", p.getPrecio()));
             btnOrdenarPC.setOnClickListener(v -> {
                 DetallePedido detallePedido = new DetallePedido();
-                detallePedido.setPlato(p);
+                detallePedido.setPlatillo(p);
                 detallePedido.setCantidad(1);
                 detallePedido.setPrecio(p.getPrecio());
                 mostrarBadgeCommunication.add(detallePedido);

@@ -2,6 +2,7 @@ package com.example.platillosvoladoresapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,18 +23,22 @@ import com.example.platillosvoladoresapp.adapter.CarritoComprasAdapter;
 import com.example.platillosvoladoresapp.communication.CarritoCommunication;
 import com.example.platillosvoladoresapp.entity.service.DetallePedido;
 import com.example.platillosvoladoresapp.entity.service.Usuario;
+import com.example.platillosvoladoresapp.entity.service.dto.GenerarPedidoDTO;
 import com.example.platillosvoladoresapp.utils.Carrito;
 import com.example.platillosvoladoresapp.utils.DateSerializer;
 import com.example.platillosvoladoresapp.utils.TimeSerializer;
+import com.example.platillosvoladoresapp.viewmodel.PedidoViewModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarritoComprasActivity extends AppCompatActivity implements CarritoCommunication {
 
+    private PedidoViewModel pedidoViewModel;
     private CarritoComprasAdapter adapter;
     private RecyclerView rcvCarritoCompras;
     Button btnFinalizarCompra;
@@ -48,8 +53,11 @@ public class CarritoComprasActivity extends AppCompatActivity implements Carrito
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrito_compras);
         init();
+        initViewModel();
         initAdapter();
     }
+
+
 
     private void init(){
         Toolbar toolbar = this.findViewById(R.id.toolbar);
@@ -70,7 +78,7 @@ public class CarritoComprasActivity extends AppCompatActivity implements Carrito
                     toastIncorrecto("¡Ups!, La bolsa de compras está vacia.");
                 } else {
                     toastCorrecto("Procesando pedido...");
-                    //registrarPedido(idC);
+                    registrarPedido(idC);
                 }
             } else {
                 toastIncorrecto("No ha iniciado sesión, se le redirigirá al login");
@@ -80,10 +88,36 @@ public class CarritoComprasActivity extends AppCompatActivity implements Carrito
         });
     }
 
+    private void initViewModel() {
+        final ViewModelProvider vmp = new ViewModelProvider(this);
+        this.pedidoViewModel = vmp.get(PedidoViewModel.class);
+    }
     private void initAdapter() {
         adapter = new CarritoComprasAdapter(Carrito.getDetallePedidos(), this);
         rcvCarritoCompras.setLayoutManager(new LinearLayoutManager(this));
         rcvCarritoCompras.setAdapter(adapter);
+    }
+
+    private void registrarPedido(int idC){
+        ArrayList<DetallePedido> detallePedidos = Carrito.getDetallePedidos();
+        GenerarPedidoDTO dto = new GenerarPedidoDTO();
+        java.util.Date date = new java.util.Date();
+        dto.getPedido().setFechaCompra(new Date(date.getTime()));
+        dto.getPedido().setAnularPedido(false);
+        dto.getPedido().setCantidad(getTotalV(detallePedidos));
+        dto.getCliente().setId(idC);
+        dto.setDetallePedido(detallePedidos);
+        this.pedidoViewModel.guardarPedido(dto).observe(this,response ->{
+            if(response.getRpta() == 1){
+                toastCorrecto("Pedido registrado con éxito");
+                Carrito.limpiar();
+                finish();
+                overridePendingTransition(R.anim.left_in, R.anim.left_out);
+            }else{
+
+                toastIncorrecto("No se pudo registrar el pedido");
+            }
+        });
     }
 
     private double getTotalV(List<DetallePedido> detalles) {

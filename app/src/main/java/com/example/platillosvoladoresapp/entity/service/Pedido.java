@@ -30,6 +30,10 @@ public class Pedido {
         return cliente;
     }
 
+    public void setCantidad(Double cantidad) {
+        this.cantidad = cantidad;
+    }
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }

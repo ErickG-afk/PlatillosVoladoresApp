@@ -1,6 +1,6 @@
 package com.example.platillosvoladoresapp.entity.service;
 
-public class Plato {
+public class Platillo {
 
     private int id;
     private String nombre;

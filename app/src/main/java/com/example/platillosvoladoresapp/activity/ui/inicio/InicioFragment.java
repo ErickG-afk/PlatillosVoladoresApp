@@ -24,12 +24,10 @@ import com.example.platillosvoladoresapp.communication.Communication;
 import com.example.platillosvoladoresapp.communication.MostrarBadgeCommunication;
 import com.example.platillosvoladoresapp.entity.SliderItem;
 import com.example.platillosvoladoresapp.entity.service.DetallePedido;
-import com.example.platillosvoladoresapp.entity.service.Plato;
+import com.example.platillosvoladoresapp.entity.service.Platillo;
 import com.example.platillosvoladoresapp.utils.Carrito;
 import com.example.platillosvoladoresapp.viewmodel.CategoriaViewModel;
 import com.example.platillosvoladoresapp.viewmodel.PlatoViewModel;
-import com.google.android.material.badge.BadgeDrawable;
-import com.google.android.material.badge.BadgeUtils;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -50,7 +48,7 @@ public class InicioFragment extends Fragment implements Communication, MostrarBa
     private PlatoViewModel platoViewModel;
     private RecyclerView rcvPlatosRecomendados;
     private PlatoRecomendadoAdapter platoRecomendadoAdapter;
-    private List<Plato> platos = new ArrayList<>();
+    private List<Platillo> platos = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.platillosvoladoresapp.R;
 import com.example.platillosvoladoresapp.api.ConfigApi;
 import com.example.platillosvoladoresapp.entity.service.DetallePedido;
-import com.example.platillosvoladoresapp.entity.service.Plato;
+import com.example.platillosvoladoresapp.entity.service.Platillo;
 import com.example.platillosvoladoresapp.utils.Carrito;
 import com.example.platillosvoladoresapp.utils.DateSerializer;
 import com.example.platillosvoladoresapp.utils.TimeSerializer;
@@ -34,7 +34,7 @@ public class DetallePlatoActivity extends AppCompatActivity {
             .registerTypeAdapter(Date.class, new DateSerializer())
             .registerTypeAdapter(Time.class, new TimeSerializer())
             .create();
-    Plato platillo;
+    Platillo platillo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +61,7 @@ public class DetallePlatoActivity extends AppCompatActivity {
     private void loadData() {
         final String detalleString = this.getIntent().getStringExtra("detallePlatillo");
         if (detalleString != null) {
-            platillo = g.fromJson(detalleString, Plato.class);
+            platillo = g.fromJson(detalleString, Platillo.class);
             this.tvNamePlatilloDetalle.setText(platillo.getNombre());
             this.tvPrecioPlatilloDetalle.setText(String.format(Locale.ENGLISH, "S/%.2f", platillo.getPrecio()));
             this.tvDescripcionPlatilloDetalle.setText(platillo.getDescripcionPlato());
@@ -79,7 +79,7 @@ public class DetallePlatoActivity extends AppCompatActivity {
         //Agregar platillos al carrito
         this.btnAgregarCarrito.setOnClickListener(v -> {
             DetallePedido detallePedido = new DetallePedido();
-            detallePedido.setPlato(platillo);
+            detallePedido.setPlatillo(platillo);
             detallePedido.setCantidad(1);
             detallePedido.setPrecio(platillo.getPrecio());
             successMessage(Carrito.agregarPlatillos(detallePedido));

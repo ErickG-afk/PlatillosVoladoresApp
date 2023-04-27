@@ -69,11 +69,11 @@ public class CarritoComprasAdapter extends RecyclerView.Adapter<CarritoComprasAd
             this.tvPrecioPDC = itemView.findViewById(R.id.tvPrecioPDC);
         }
         public void setItem(final DetallePedido dp) {
-            this.tvNombrePlatilloDC.setText(dp.getPlato().getNombre());
+            this.tvNombrePlatilloDC.setText(dp.getPlatillo().getNombre());
             this.tvPrecioPDC.setText(String.format(Locale.ENGLISH, "S/%.2f", dp.getPrecio()));
             int cant = dp.getCantidad();
             this.edtCantidad.setText(Integer.toString(cant));
-            String url = ConfigApi.dataB_URL + "/api/documento-almacenado/download/" + dp.getPlato().getFoto().getFileName();
+            String url = ConfigApi.dataB_URL + "/api/documento-almacenado/download/" + dp.getPlatillo().getFoto().getFileName();
             Picasso picasso = new Picasso.Builder(itemView.getContext())
                     .downloader(new OkHttp3Downloader(ConfigApi.getClient()))
                     .build();
@@ -97,7 +97,7 @@ public class CarritoComprasAdapter extends RecyclerView.Adapter<CarritoComprasAd
 
             //------------------Eliminar item del carrito-----------------------
             this.btnEliminarPCarrito.setOnClickListener(v -> {
-                showMsg(dp.getPlato().getId());
+                showMsg(dp.getPlatillo().getId());
             });
         }
         private void showMsg(int idPlatillo) {
