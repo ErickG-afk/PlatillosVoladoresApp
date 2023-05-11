@@ -70,7 +70,7 @@ public class CarritoComprasAdapter extends RecyclerView.Adapter<CarritoComprasAd
         }
         public void setItem(final DetallePedido dp) {
             this.tvNombrePlatilloDC.setText(dp.getPlatillo().getNombre());
-            this.tvPrecioPDC.setText(String.format(Locale.ENGLISH, "S/%.2f", dp.getPrecio()));
+            this.tvPrecioPDC.setText(String.format(Locale.FRENCH, "%.2f €", dp.getPrecio()));
             int cant = dp.getCantidad();
             this.edtCantidad.setText(Integer.toString(cant));
             String url = ConfigApi.dataB_URL + "/api/documento-almacenado/download/" + dp.getPlatillo().getFoto().getFileName();

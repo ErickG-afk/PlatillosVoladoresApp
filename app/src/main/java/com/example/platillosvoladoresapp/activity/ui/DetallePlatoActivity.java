@@ -52,7 +52,7 @@ public class DetallePlatoActivity extends AppCompatActivity {
         });
         this.imgPlatilloDetalle = findViewById(R.id.imgPlatilloDetalle);
         this.btnAgregarCarrito = findViewById(R.id.btnAgregarCarrito);
-        this.btnComprar = findViewById(R.id.btnComprar);
+//        this.btnComprar = findViewById(R.id.btnComprar);
         this.tvNamePlatilloDetalle = findViewById(R.id.tvNamePlatilloDetalle);
         this.tvPrecioPlatilloDetalle = findViewById(R.id.tvPrecioPlatilloDetalle);
         this.tvDescripcionPlatilloDetalle = findViewById(R.id.tvDescripcionPlatilloDetalle);
