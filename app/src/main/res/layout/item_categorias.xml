@@ -29,16 +29,19 @@
                 android:id="@+id/txtNombreCategoria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:layout_alignLeft="@+id/imgCategoria"
                 android:layout_alignRight="@+id/imgCategoria"
                 android:layout_alignBottom="@+id/imgCategoria"
+                android:layout_marginLeft="-3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="86dp"
                 android:fontFamily="@font/poppins_medium"
-                android:textSize="18sp"
                 android:gravity="center"
-                android:textStyle="bold"
                 android:text="Categoría 1"
-                android:textColor="#000" />
+                android:background="@color/faded_black"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 

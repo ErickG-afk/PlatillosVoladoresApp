@@ -79,7 +79,7 @@ public class PlatosPorCategoriaAdapter extends RecyclerView.Adapter<PlatosPorCat
                     .error(R.drawable.image_not_found)
                     .into(imgPlatilloC);
             namePlatilloC.setText(p.getNombre());
-            txtPricePlatilloC.setText(String.format(Locale.ENGLISH, "S/%.2f", p.getPrecio()));
+            txtPricePlatilloC.setText(String.format(Locale.FRENCH, "%.2f €", p.getPrecio()));
             btnOrdenarPC.setOnClickListener(v -> {
                 DetallePedido detallePedido = new DetallePedido();
                 detallePedido.setPlatillo(p);

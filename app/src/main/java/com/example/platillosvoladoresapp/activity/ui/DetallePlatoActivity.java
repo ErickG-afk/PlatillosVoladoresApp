@@ -46,7 +46,7 @@ public class DetallePlatoActivity extends AppCompatActivity {
     private void init() {
         Toolbar toolbar = this.findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_volver_atras);
-        toolbar.setNavigationOnClickListener(v -> {//Reemplazo con lamba
+        toolbar.setNavigationOnClickListener(v -> {
             this.finish();
             this.overridePendingTransition(R.anim.rigth_in, R.anim.rigth_out);
         });
@@ -63,7 +63,7 @@ public class DetallePlatoActivity extends AppCompatActivity {
         if (detalleString != null) {
             platillo = g.fromJson(detalleString, Platillo.class);
             this.tvNamePlatilloDetalle.setText(platillo.getNombre());
-            this.tvPrecioPlatilloDetalle.setText(String.format(Locale.ENGLISH, "S/%.2f", platillo.getPrecio()));
+            this.tvPrecioPlatilloDetalle.setText(String.format(Locale.FRENCH, "%.2f €", platillo.getPrecio()));
             this.tvDescripcionPlatilloDetalle.setText(platillo.getDescripcionPlato());
             String url = ConfigApi.dataB_URL + "/api/documento-almacenado/download/" + platillo.getFoto().getFileName();
 

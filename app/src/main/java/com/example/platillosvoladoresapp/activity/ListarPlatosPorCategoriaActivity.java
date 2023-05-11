@@ -56,7 +56,7 @@ public class ListarPlatosPorCategoriaActivity extends AppCompatActivity implemen
         rcvPlatoPorCategoria = findViewById(R.id.rcvPlatillosPorCategoria);
         rcvPlatoPorCategoria.setAdapter(adapter);
         rcvPlatoPorCategoria.setLayoutManager(new LinearLayoutManager(this));
-        //rcvPlatilloPorCategoria.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        //rcvPlatoPorCategoria.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
     private void loadData() {

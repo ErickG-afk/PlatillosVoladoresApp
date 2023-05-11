@@ -71,6 +71,7 @@ public class InicioFragment extends Fragment implements Communication, MostrarBa
         list.add(new SliderItem(R.drawable.tortilla_de_patatas,"Tortilla"));
         list.add(new SliderItem(R.drawable.croquetas,"Croquetas"));
         list.add(new SliderItem(R.drawable.paella,"Paella"));
+        list.add(new SliderItem(R.drawable.carnes,"Carnes"));
         sliderAdapter.updateItem(list);
         categoriaViewModel.listarCategoriasActivas().observe(getViewLifecycleOwner(), response -> {
             if(response.getRpta() ==1){

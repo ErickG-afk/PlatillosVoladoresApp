@@ -18,12 +18,13 @@
 
         <TextView
             android:id="@+id/tv_auto_image_slider"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="25dp"
             android:padding="6dp"
-            android:textColor="@color/teal_700"
+            android:background="@color/faded_black"
+            android:textColor="@color/white"
             android:textSize="25sp" />
 
     </FrameLayout>

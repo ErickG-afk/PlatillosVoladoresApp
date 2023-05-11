@@ -35,7 +35,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/san_francisco"
-                android:text="Seco De Cabrito"
+                android:text="Gazpacho"
                 android:textColor="#000"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -57,7 +57,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/san_francisco"
-                android:text="S/. 18.00"
+                android:text="18.00 €"
                 android:textColor="#000"
                 android:textSize="16dp" />
 
